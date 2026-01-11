@@ -6,7 +6,7 @@ This document details the security vulnerabilities that were identified and patc
 
 ## Vulnerabilities Fixed
 
-### 1. Cryptography - NULL Pointer Dereference (CVE-2024-XXXXX)
+### 1. Cryptography - NULL Pointer Dereference (CVE pending)
 
 **Severity**: High
 

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """Interactive script to help generate GitHub tokens."""
-import sys
 
 
 def main():

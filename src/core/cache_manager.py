@@ -1,6 +1,5 @@
 """Cache Manager for Redis Operations"""
 from typing import Any, Optional
-import json
 
 # TODO: Implement Redis cache manager
 # from redis import Redis

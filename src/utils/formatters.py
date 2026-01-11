@@ -1,6 +1,5 @@
 """Formatting Utilities"""
 from datetime import datetime
-from typing import Optional
 
 
 def format_markdown(text: str) -> str:

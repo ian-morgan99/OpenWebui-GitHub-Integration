@@ -1,9 +1,8 @@
 """Authentication and Authorization Middleware"""
 from typing import Optional
 
-from fastapi import Depends, HTTPException, Security, status
+from fastapi import HTTPException, Security, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer, OAuth2AuthorizationCodeBearer
-from jose import JWTError, jwt
 
 from src.config.settings import settings
 
@@ -43,6 +42,11 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Security(
     Raises:
         HTTPException: If token is invalid or missing
     """
+    # Check if authentication bypass is enabled
+    if settings.BYPASS_AUTHENTICATION:
+        # Return dummy user for development only - NOT FOR PRODUCTION
+        return TokenData(username="dev-user", scopes=["repo"])
+    
     # TODO: Implement actual JWT validation
     # This is a skeleton implementation
     
@@ -67,7 +71,7 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Security(
     # except JWTError:
     #     raise credentials_exception
     
-    # For now, return a dummy user
+    # Skeleton: return dummy user until JWT validation is implemented
     return TokenData(username="user", scopes=["repo"])
 
 

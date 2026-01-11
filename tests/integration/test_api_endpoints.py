@@ -1,5 +1,4 @@
 """Integration Tests for API Endpoints"""
-import pytest
 from fastapi import status
 
 

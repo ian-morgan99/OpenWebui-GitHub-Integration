@@ -1,6 +1,4 @@
 """Unit Tests for Validators"""
-import pytest
-
 from src.utils.validators import (
     validate_branch_name,
     validate_github_token,

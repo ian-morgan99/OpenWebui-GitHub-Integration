@@ -53,24 +53,43 @@ class Settings(BaseSettings):
     CORS_ALLOW_METHODS: List[str] = ["*"]
     CORS_ALLOW_HEADERS: List[str] = ["*"]
 
+    # Authentication
+    BYPASS_AUTHENTICATION: bool = Field(
+        default=False,
+        description="Bypass authentication for development (NOT FOR PRODUCTION)",
+    )
+
     @field_validator("SECRET_KEY")
     @classmethod
-    def validate_secret_key(cls, v: str) -> str:
+    def validate_secret_key(cls, v: str, info) -> str:
         """Validate that SECRET_KEY is set in production."""
-        if not v:
-            raise ValueError("SECRET_KEY must be set")
-        if len(v) < 32:
+        # Skip validation in development if BYPASS_AUTHENTICATION is True
+        environment = info.data.get("ENVIRONMENT", "development")
+        bypass_auth = info.data.get("BYPASS_AUTHENTICATION", False)
+        
+        if environment == "production" and not v:
+            raise ValueError("SECRET_KEY must be set in production")
+        if v and len(v) < 32:
             raise ValueError("SECRET_KEY must be at least 32 characters long")
+        # Allow empty in development only
+        if not v and environment != "production":
+            return "dev-secret-key-not-for-production-use-only-" + "x" * 32
         return v
 
     @field_validator("ENCRYPTION_KEY")
     @classmethod
-    def validate_encryption_key(cls, v: str) -> str:
-        """Validate that ENCRYPTION_KEY is set."""
-        if not v:
-            raise ValueError("ENCRYPTION_KEY must be set")
-        if len(v) < 32:
+    def validate_encryption_key(cls, v: str, info) -> str:
+        """Validate that ENCRYPTION_KEY is set in production."""
+        # Skip validation in development if BYPASS_AUTHENTICATION is True
+        environment = info.data.get("ENVIRONMENT", "development")
+        
+        if environment == "production" and not v:
+            raise ValueError("ENCRYPTION_KEY must be set in production")
+        if v and len(v) < 32:
             raise ValueError("ENCRYPTION_KEY must be at least 32 characters long")
+        # Allow empty in development only
+        if not v and environment != "production":
+            return "dev-encryption-key-not-for-production-use-" + "x" * 32
         return v
 
 

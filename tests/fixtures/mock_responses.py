@@ -13,7 +13,7 @@ def mock_repository_response():
             "type": "User",
         },
         "private": False,
-        "description": "This your first repo!",
+        "description": "This is your first repo!",
         "fork": False,
         "created_at": "2011-01-26T19:01:12Z",
         "updated_at": "2024-01-01T00:00:00Z",

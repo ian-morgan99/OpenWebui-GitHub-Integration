@@ -1,9 +1,9 @@
 """Repository API Endpoints"""
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 
 from src.api.middleware.auth import get_current_user, TokenData
 from src.models.requests import RepositoryAnalysisRequest
-from src.models.responses import RepositoryHealthResponse, StandardResponse
+from src.models.responses import StandardResponse
 
 router = APIRouter()
 
