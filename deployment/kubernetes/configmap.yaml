@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: github-architect-config
+data:
+  LOG_LEVEL: "INFO"
+  ENVIRONMENT: "production"
+  API_V1_PREFIX: "/api/v1"
+  DEFAULT_RATE_LIMIT: "1000/hour"
+  GITHUB_CALLBACK_URL: "https://api.github-architect.example.com/auth/callback"
+  DATABASE_URL: "postgresql://postgres:password@postgres-service:5432/github_architect"
+  REDIS_URL: "redis://redis-service:6379/0"
